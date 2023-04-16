@@ -9,7 +9,7 @@ const App = {
   },
 
   state: {
-    currentPlayer: 1,
+    moves: [],
   },
 
   init() {
@@ -35,15 +35,25 @@ const App = {
     //TODO
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
+        //replaced event with square. Check if there is already a play,if so, return early.
+        const hasMove = (squareId) => {
+          const existingMove = App.state.moves.find(
+            (move) => move.squareId === squareId
+          );
+          return existingMove !== undefined;
+        };
 
-
-        //replaced event with square. Click event can occur on
-        //either icon or square where as square is better defined.
-        if (square.hasChildNodes()) {
+        if (hasMove(+square.Id)) {
           return;
         }
 
-        const currentPlayer = App.state.currentPlayer;
+        //Determine which player icon to add to the square
+        const lastMove = App.state.moves.at(-1);
+        const getOppositePlayer = (playerId) => (playerId === 1 ? 2 : 1);
+        const currentPlayer =
+          App.state.moves.length === 0
+            ? 1
+            : getOppositePlayer(lastMove.playerId);
 
         const icon = document.createElement("i");
 
@@ -53,9 +63,25 @@ const App = {
           icon.classList.add("fa-solid", "fa-o", "turquoise");
         }
 
-        App.state.currentPlayer = App.state.currentPlayer === 1 ? 2 : 1;
+        App.state.moves.push({
+          squareId: +square.id,
+          playerId: currentPlayer,
+        });
 
         square.replaceChildren(icon);
+
+        //check if there is a winner or tie game
+
+        const winningPatterns = [
+          [1, 2, 3],
+          [1, 5, 9],
+          [1, 4, 7],
+          [2, 5, 8],
+          [3, 5, 7],
+          [3, 6, 9],
+          [4, 5, 6],
+          [7, 8, 9],
+        ];
       });
     });
   },

@@ -35,8 +35,13 @@ const App = {
     //TODO
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
-        console.log(`square with id ${event.target.id} was clicked`);
-        console.log(`Current player is ${App.state.currentPlayer}`);
+
+
+        //replaced event with square. Click event can occur on
+        //either icon or square where as square is better defined.
+        if (square.hasChildNodes()) {
+          return;
+        }
 
         const currentPlayer = App.state.currentPlayer;
 
@@ -50,7 +55,7 @@ const App = {
 
         App.state.currentPlayer = App.state.currentPlayer === 1 ? 2 : 1;
 
-        event.target.replaceChildren(icon);
+        square.replaceChildren(icon);
       });
     });
   },

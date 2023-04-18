@@ -15,9 +15,9 @@
     <main>
       <div class="grid">
         <!-- Turn indicator -->
-        <div class="turn">
-          <i class="fa-solid fa-x yellow"></i>
-          <p class="turquoise">Player 1, your turn!</p>
+        <div class="turn yellow" dataId="turn">
+          <i class="fa-solid fa-x"></i>
+          <p>Player 1, your turn!</p>
         </div>
 
         <!--drop down menu-->
@@ -91,10 +91,10 @@
     </footer>
 
     <!--Modal, opens when game ends-->
-    <div class="modal hidden">
+    <div class="modal hidden" data-id="modal">
       <div class="modal-contents">
-        <p>Player 1 wins!</p>
-        <button>Play again</button>
+        <p data-id="modal-text">Player 1 wins!</p>
+        <button data-id="modal-btn">Play again</button>
       </div>
     </div>
 

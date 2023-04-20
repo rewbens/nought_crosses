@@ -99,13 +99,12 @@ const App = {
           App.state.moves.length === 0
             ? 1
             : getOppositePlayer(lastMove.playerId);
-
         const nextPlayer = getOppositePlayer(currentPlayer);
 
         const squareIcon = document.createElement("i");
         const turnIcon = document.createElement("i");
-        const turnLabel = document.createElement("p");
-        turnLabel.innerText = `Player ${nextPlayer}, your turn!`;
+        const turnLabel = document.createElement("p")
+        turnLabel.innerText = `Player ${nextPlayer}, your turn!`
 
         if (currentPlayer === 1) {
           squareIcon.classList.add("fa-solid", "fa-x", "yellow");
@@ -116,7 +115,7 @@ const App = {
         }
 
         App.$.turn.replaceChildren(turnIcon, turnLabel);
-        
+
         //checks history and changes state
         App.state.moves.push({
           squareId: +square.id,

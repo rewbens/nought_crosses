@@ -1,3 +1,5 @@
+import View from "./view.js";
+
 const App = {
   // All of our selected HTML elements
   $: {
@@ -73,6 +75,7 @@ const App = {
 
     App.$.modalBtn.addEventListener("click", (event) => {
       App.state.moves = [];
+      //refresh the square
       App.$.squares.forEach((square) => square.replaceChildren());
       App.$.modal.classList.add("hidden");
     });
@@ -103,15 +106,17 @@ const App = {
 
         const squareIcon = document.createElement("i");
         const turnIcon = document.createElement("i");
-        const turnLabel = document.createElement("p")
-        turnLabel.innerText = `Player ${nextPlayer}, your turn!`
+        const turnLabel = document.createElement("p");
+        turnLabel.innerText = `Player ${nextPlayer}, your turn!`;
 
         if (currentPlayer === 1) {
           squareIcon.classList.add("fa-solid", "fa-x", "yellow");
           turnIcon.classList.add("fa-solid", "fa-o", "turquoise");
+          turnLabel.classList = "turquoise";
         } else {
           squareIcon.classList.add("fa-solid", "fa-o", "turquoise");
           turnIcon.classList.add("fa-solid", "fa-x", "yellow");
+          turnLabel.classList = "yellow";
         }
 
         App.$.turn.replaceChildren(turnIcon, turnLabel);
@@ -123,6 +128,7 @@ const App = {
         });
 
         square.replaceChildren(squareIcon);
+        console.log(squareIcon);
 
         //check if there is a winner or tie game
 
@@ -146,3 +152,11 @@ const App = {
 
 //loads app, calling all EventListeners registered in init
 window.addEventListener("load", App.init);
+
+function init() {
+  const view = new View();
+
+  console.log(view.$.turn);
+}
+
+window.addEventListener("load", init);

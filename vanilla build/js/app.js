@@ -1,6 +1,6 @@
 import View from "./view.js";
 
-const App = {
+ const App = {
   // All of our selected HTML elements
   $: {
     menu: document.querySelector('[data-id="menu"]'),
@@ -150,11 +150,25 @@ const App = {
   },
 };
 
-//loads app, calling all EventListeners registered in init
-window.addEventListener("load", App.init);
+
 
 function init() {
   const view = new View();
+
+  view.bindGameResetEvent(event => {
+    console.log('Reset event')
+    console.log(event)
+  })
+
+  view.bindNewRoundEvent(event => {
+    console.log('New round event')
+    console.log(event)
+  })
+
+  view.bindPlayerMoveEvent(event => {
+    console.log('Player move event')
+    console.log(event)
+  })
 
   console.log(view.$.turn);
 }
